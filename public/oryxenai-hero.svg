@@ -1,0 +1,356 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGlow" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#141824" />
+      <stop offset="50%" stop-color="#0a0b10" />
+      <stop offset="100%" stop-color="#050508" />
+    </radialGradient>
+
+    <!-- Floor Reflection Gradient -->
+    <linearGradient id="floorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0e1017" />
+      <stop offset="30%" stop-color="#08090d" />
+      <stop offset="100%" stop-color="#030305" />
+    </linearGradient>
+
+    <!-- Red and Cyan Neon Glow Filters -->
+    <filter id="glowRed" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="glowCyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="8" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <filter id="glowText" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="16" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Glass Gradients for Stages -->
+    <linearGradient id="glassStageRed" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF3366" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#1a0812" stop-opacity="0.8" />
+    </linearGradient>
+
+    <linearGradient id="glassStageMagenta" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D926A9" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#16081e" stop-opacity="0.8" />
+    </linearGradient>
+
+    <linearGradient id="glassStagePurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#0e0a24" stop-opacity="0.8" />
+    </linearGradient>
+
+    <linearGradient id="glassStageBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#081024" stop-opacity="0.8" />
+    </linearGradient>
+
+    <linearGradient id="glassStageCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.3" />
+      <stop offset="100%" stop-color="#041822" stop-opacity="0.8" />
+    </linearGradient>
+
+    <!-- Title Gradient -->
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFFFF" />
+      <stop offset="58%" stop-color="#FFFFFF" />
+      <stop offset="78%" stop-color="#FF4B72" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+
+    <!-- Conduit Line Gradients -->
+    <linearGradient id="redConduits" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF2E55" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#FF3366" stop-opacity="0.2" />
+    </linearGradient>
+
+    <linearGradient id="cyanConduits" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.9" />
+    </linearGradient>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="800" fill="url(#bgGlow)" />
+
+  <!-- Obsidian Horizon & Reflective Ground -->
+  <rect y="480" width="1200" height="320" fill="url(#floorGrad)" />
+  <line x1="0" y1="480" x2="1200" y2="480" stroke="#1f2438" stroke-width="1" />
+
+  <!-- Soft Ambient Glow Pools on the Reflective Floor -->
+  <ellipse cx="200" cy="510" rx="220" ry="40" fill="#FF1E4B" opacity="0.18" />
+  <ellipse cx="600" cy="520" rx="350" ry="35" fill="#8B5CF6" opacity="0.12" />
+  <ellipse cx="980" cy="510" rx="220" ry="40" fill="#00D2FF" opacity="0.18" />
+
+  <!-- Rocky Obsidian Forefront Silhouettes (Left & Right) -->
+  <path d="M-20 720 L160 620 L240 680 L320 640 L400 750 L460 810 L-20 810 Z" fill="#080709" stroke="#FF2E55" stroke-width="1.5" stroke-opacity="0.4" />
+  <path d="M1220 720 L1040 620 L960 680 L880 640 L800 750 L740 810 L1220 810 Z" fill="#080709" stroke="#00D2FF" stroke-width="1.5" stroke-opacity="0.4" />
+
+  <!-- ==================== HEADER BRANDING ==================== -->
+  <g id="Header" transform="translate(600, 140)" text-anchor="middle">
+    <!-- Brand Name with Glow -->
+    <text y="0" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="82" fill="url(#titleGrad)" letter-spacing="-1.5" filter="url(#glowText)">OryxenAI</text>
+    
+    <!-- Subtitle -->
+    <text y="48" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="20" fill="#FAF8F5" letter-spacing="8" opacity="0.95">AI PORTFOLIO GENERATION</text>
+    
+    <!-- Tagline with Accent Bars -->
+    <g transform="translate(0, 80)">
+      <line x1="-240" y1="-5" x2="-180" y2="-5" stroke="#FF2E55" stroke-width="3" stroke-linecap="round" />
+      <text font-family="system-ui, -apple-system, sans-serif" font-weight="400" font-size="18" fill="#94A3B8" letter-spacing="1">From resume to live preview</text>
+      <line x1="180" y1="-5" x2="240" y2="-5" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" />
+    </g>
+  </g>
+
+  <!-- ==================== LEFT: RESUME INPUT STACK ==================== -->
+  <g id="ResumeSource" transform="translate(80, 290)">
+    <!-- Base Pedestal Ring -->
+    <ellipse cx="90" cy="240" rx="95" ry="24" fill="#14080e" stroke="#FF2E55" stroke-width="3" filter="url(#glowRed)" />
+    <ellipse cx="90" cy="240" rx="80" ry="18" fill="#200a14" />
+
+    <!-- Tilted Stack Papers -->
+    <!-- Page 3 (Back) -->
+    <rect x="25" y="10" width="130" height="195" rx="6" fill="#1a1c23" stroke="#374151" stroke-width="1.5" transform="rotate(-9 90 100)" />
+    <!-- Page 2 (Mid) -->
+    <rect x="22" y="5" width="130" height="195" rx="6" fill="#f1f5f9" opacity="0.92" transform="rotate(-4 90 100)" />
+    <!-- Page 1 (Front Main) -->
+    <g transform="rotate(1 90 100)">
+      <rect x="25" y="0" width="135" height="205" rx="8" fill="#FAF8F5" stroke="#CBD5E1" stroke-width="1.5" filter="drop-shadow(0 15px 25px rgba(0,0,0,0.6))" />
+      <!-- Avatar Circle -->
+      <circle cx="55" cy="30" r="14" fill="#94A3B8" />
+      <circle cx="55" cy="26" r="6" fill="#FAF8F5" />
+      <path d="M46 38 C46 34 50 33 55 33 C60 33 64 34 64 38 Z" fill="#FAF8F5" />
+      <!-- Resume Header Lines -->
+      <rect x="80" y="22" width="65" height="5" rx="2.5" fill="#0F172A" />
+      <rect x="80" y="32" width="45" height="3.5" rx="1.75" fill="#64748B" />
+      <line x1="38" y1="52" x2="147" y2="52" stroke="#E2E8F0" stroke-width="1.5" />
+      <!-- Resume Bullet Lines -->
+      <circle cx="44" cy="68" r="2.5" fill="#FF2E55" />
+      <rect x="52" y="66" width="92" height="4" rx="2" fill="#334155" />
+      <rect x="52" y="74" width="70" height="3" rx="1.5" fill="#64748B" />
+
+      <circle cx="44" cy="92" r="2.5" fill="#FF2E55" />
+      <rect x="52" y="90" width="90" height="4" rx="2" fill="#334155" />
+      <rect x="52" y="98" width="60" height="3" rx="1.5" fill="#64748B" />
+
+      <circle cx="44" cy="116" r="2.5" fill="#FF2E55" />
+      <rect x="52" y="114" width="85" height="4" rx="2" fill="#334155" />
+      <rect x="52" y="122" width="75" height="3" rx="1.5" fill="#64748B" />
+
+      <circle cx="44" cy="140" r="2.5" fill="#FF2E55" />
+      <rect x="52" y="138" width="88" height="4" rx="2" fill="#334155" />
+      <rect x="52" y="146" width="55" height="3" rx="1.5" fill="#64748B" />
+
+      <circle cx="44" cy="164" r="2.5" fill="#FF2E55" />
+      <rect x="52" y="162" width="82" height="4" rx="2" fill="#334155" />
+      <rect x="52" y="170" width="68" height="3" rx="1.5" fill="#64748B" />
+    </g>
+  </g>
+
+  <!-- Glowing Red Neural Conduits (Resume -> Pipeline) -->
+  <g stroke="url(#redConduits)" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M230 360 C 270 360, 280 430, 330 430" opacity="0.8" />
+    <path d="M235 380 C 280 380, 290 445, 330 445" opacity="0.9" stroke-width="3.5" />
+    <path d="M230 410 C 275 410, 285 460, 330 460" opacity="0.7" />
+    <path d="M225 435 C 265 435, 290 475, 330 475" opacity="0.6" stroke-width="2" />
+  </g>
+
+  <!-- ==================== 5-STAGE AGENT PIPELINE ==================== -->
+  <g id="Pipeline" transform="translate(320, 370)">
+    <!-- Base Platform Shelf -->
+    <rect x="0" y="145" width="560" height="26" rx="13" fill="#0C0F1A" stroke="#1E293B" stroke-width="2" />
+    <line x1="20" y1="158" x2="540" y2="158" stroke="#334155" stroke-width="2" stroke-dasharray="6 6" />
+
+    <!-- STAGE 1: Discovery (Search) -->
+    <g transform="translate(10, 0)">
+      <!-- Mini Glowing Pedestal -->
+      <ellipse cx="45" cy="142" rx="38" ry="10" fill="#FF1E4B" opacity="0.3" filter="url(#glowRed)" />
+      <!-- Glass Card Frame -->
+      <rect x="0" y="0" width="90" height="135" rx="18" fill="url(#glassStageRed)" stroke="#FF2E55" stroke-width="2" />
+      <!-- Icon Container -->
+      <circle cx="45" cy="55" r="25" fill="#14060C" stroke="#FF2E55" stroke-width="1.5" />
+      <!-- Search Magnifier Icon -->
+      <circle cx="42" cy="52" r="10" stroke="#FAF8F5" stroke-width="3" fill="none" />
+      <line x1="49" y1="59" x2="57" y2="67" stroke="#FAF8F5" stroke-width="3" stroke-linecap="round" />
+      <!-- Stage Label -->
+      <text x="45" y="105" font-family="system-ui, sans-serif" font-weight="800" font-size="11" fill="#FF8BA7" text-anchor="middle" letter-spacing="1">STAGE 1</text>
+      <text x="45" y="120" font-family="system-ui, sans-serif" font-weight="600" font-size="9" fill="#E2E8F0" text-anchor="middle">DISCOVERY</text>
+    </g>
+
+    <!-- Connector Arrow 1 -> 2 -->
+    <g transform="translate(105, 58)" fill="#FF2E55">
+      <path d="M0 0 L14 0 L14 -4 L22 3 L14 10 L14 6 L0 6 Z" opacity="0.9" />
+    </g>
+
+    <!-- STAGE 2: Content Architecture (List/Structure) -->
+    <g transform="translate(125, 0)">
+      <!-- Mini Glowing Pedestal -->
+      <ellipse cx="45" cy="142" rx="38" ry="10" fill="#D926A9" opacity="0.3" filter="url(#glowRed)" />
+      <!-- Glass Card Frame -->
+      <rect x="0" y="0" width="90" height="135" rx="18" fill="url(#glassStageMagenta)" stroke="#D926A9" stroke-width="2" />
+      <!-- Icon Container -->
+      <circle cx="45" cy="55" r="25" fill="#18051a" stroke="#D926A9" stroke-width="1.5" />
+      <!-- Bulleted Hierarchy Icon -->
+      <circle cx="34" cy="45" r="2.5" fill="#FAF8F5" />
+      <line x1="42" y1="45" x2="58" y2="45" stroke="#FAF8F5" stroke-width="2.5" stroke-linecap="round" />
+      <circle cx="34" cy="55" r="2.5" fill="#FAF8F5" />
+      <line x1="42" y1="55" x2="58" y2="55" stroke="#FAF8F5" stroke-width="2.5" stroke-linecap="round" />
+      <circle cx="34" cy="65" r="2.5" fill="#FAF8F5" />
+      <line x1="42" y1="65" x2="58" y2="65" stroke="#FAF8F5" stroke-width="2.5" stroke-linecap="round" />
+      <!-- Stage Label -->
+      <text x="45" y="105" font-family="system-ui, sans-serif" font-weight="800" font-size="11" fill="#F472B6" text-anchor="middle" letter-spacing="1">STAGE 2</text>
+      <text x="45" y="120" font-family="system-ui, sans-serif" font-weight="600" font-size="9" fill="#E2E8F0" text-anchor="middle">CONTENT</text>
+    </g>
+
+    <!-- Connector Arrow 2 -> 3 -->
+    <g transform="translate(220, 58)" fill="#C084FC">
+      <path d="M0 0 L14 0 L14 -4 L22 3 L14 10 L14 6 L0 6 Z" opacity="0.9" />
+    </g>
+
+    <!-- STAGE 3: Visual Direction (Palette/Paintbrush) -->
+    <g transform="translate(240, 0)">
+      <!-- Mini Glowing Pedestal -->
+      <ellipse cx="45" cy="142" rx="38" ry="10" fill="#8B5CF6" opacity="0.3" />
+      <!-- Glass Card Frame -->
+      <rect x="0" y="0" width="90" height="135" rx="18" fill="url(#glassStagePurple)" stroke="#8B5CF6" stroke-width="2" />
+      <!-- Icon Container -->
+      <circle cx="45" cy="55" r="25" fill="#110a26" stroke="#8B5CF6" stroke-width="1.5" />
+      <!-- Paintbrush / Palette Icon -->
+      <path d="M35 63 C35 55 45 42 55 42 C57 48 53 54 48 57 C45 59 44 65 39 65 Z" fill="#FAF8F5" />
+      <circle cx="53" cy="45" r="2" fill="#8B5CF6" />
+      <!-- Stage Label -->
+      <text x="45" y="105" font-family="system-ui, sans-serif" font-weight="800" font-size="11" fill="#C084FC" text-anchor="middle" letter-spacing="1">STAGE 3</text>
+      <text x="45" y="120" font-family="system-ui, sans-serif" font-weight="600" font-size="9" fill="#E2E8F0" text-anchor="middle">DESIGN</text>
+    </g>
+
+    <!-- Connector Arrow 3 -> 4 -->
+    <g transform="translate(335, 58)" fill="#60A5FA">
+      <path d="M0 0 L14 0 L14 -4 L22 3 L14 10 L14 6 L0 6 Z" opacity="0.9" />
+    </g>
+
+    <!-- STAGE 4: Generation Engine (Gear/Synthesis) -->
+    <g transform="translate(355, 0)">
+      <!-- Mini Glowing Pedestal -->
+      <ellipse cx="45" cy="142" rx="38" ry="10" fill="#3B82F6" opacity="0.3" />
+      <!-- Glass Card Frame -->
+      <rect x="0" y="0" width="90" height="135" rx="18" fill="url(#glassStageBlue)" stroke="#3B82F6" stroke-width="2" />
+      <!-- Icon Container -->
+      <circle cx="45" cy="55" r="25" fill="#081026" stroke="#3B82F6" stroke-width="1.5" />
+      <!-- Cog / Engine Icon -->
+      <circle cx="45" cy="55" r="8" fill="none" stroke="#FAF8F5" stroke-width="3" />
+      <path d="M45 40 L45 44 M45 66 L45 70 M30 55 L34 55 M56 55 L60 55 M34 44 L37 47 M53 63 L56 66 M34 66 L37 63 M53 47 L56 44" stroke="#FAF8F5" stroke-width="3" stroke-linecap="round" />
+      <!-- Stage Label -->
+      <text x="45" y="105" font-family="system-ui, sans-serif" font-weight="800" font-size="11" fill="#93C5FD" text-anchor="middle" letter-spacing="1">STAGE 4</text>
+      <text x="45" y="120" font-family="system-ui, sans-serif" font-weight="600" font-size="9" fill="#E2E8F0" text-anchor="middle">ENGINE</text>
+    </g>
+
+    <!-- Connector Arrow 4 -> 5 -->
+    <g transform="translate(450, 58)" fill="#38BDF8">
+      <path d="M0 0 L14 0 L14 -4 L22 3 L14 10 L14 6 L0 6 Z" opacity="0.9" />
+    </g>
+
+    <!-- STAGE 5: Verification (Checkmark/Browser Gate) -->
+    <g transform="translate(470, 0)">
+      <!-- Mini Glowing Pedestal -->
+      <ellipse cx="45" cy="142" rx="38" ry="10" fill="#06B6D4" opacity="0.4" filter="url(#glowCyan)" />
+      <!-- Glass Card Frame -->
+      <rect x="0" y="0" width="90" height="135" rx="18" fill="url(#glassStageCyan)" stroke="#00D2FF" stroke-width="2" />
+      <!-- Icon Container -->
+      <circle cx="45" cy="55" r="25" fill="#031622" stroke="#00D2FF" stroke-width="1.5" />
+      <!-- Verified Shield Checkmark Icon -->
+      <circle cx="45" cy="55" r="14" fill="#082F49" />
+      <path d="M38 55 L43 60 L52 49" fill="none" stroke="#38BDF8" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+      <!-- Stage Label -->
+      <text x="45" y="105" font-family="system-ui, sans-serif" font-weight="800" font-size="11" fill="#38BDF8" text-anchor="middle" letter-spacing="1">STAGE 5</text>
+      <text x="45" y="120" font-family="system-ui, sans-serif" font-weight="600" font-size="9" fill="#E2E8F0" text-anchor="middle">VERIFIED</text>
+    </g>
+  </g>
+
+  <!-- Glowing Cyan Neural Conduits (Pipeline -> Live Preview) -->
+  <g stroke="url(#cyanConduits)" stroke-width="3" fill="none" stroke-linecap="round">
+    <path d="M890 430 C 930 430, 940 370, 970 370" opacity="0.8" />
+    <path d="M890 445 C 935 445, 945 390, 975 390" opacity="0.9" stroke-width="3.5" />
+    <path d="M890 460 C 935 460, 945 420, 975 420" opacity="0.7" />
+    <path d="M890 475 C 930 475, 950 440, 980 440" opacity="0.6" stroke-width="2" />
+  </g>
+
+  <!-- ==================== RIGHT: LIVE PREVIEW BROWSER ==================== -->
+  <g id="LivePreviewScreen" transform="translate(930, 260)">
+    <!-- Base Pedestal Ring -->
+    <ellipse cx="115" cy="275" rx="125" ry="26" fill="#041824" stroke="#00D2FF" stroke-width="3" filter="url(#glowCyan)" />
+    <ellipse cx="115" cy="275" rx="105" ry="20" fill="#08253a" />
+
+    <!-- Browser Window Frame -->
+    <rect x="0" y="0" width="230" height="260" rx="16" fill="#0B0F19" stroke="#00D2FF" stroke-width="2" filter="drop-shadow(0 20px 30px rgba(0,0,0,0.8))" />
+
+    <!-- Browser Header Dots -->
+    <rect x="0" y="0" width="230" height="30" rx="16" fill="#131B2E" />
+    <circle cx="18" cy="15" r="4.5" fill="#EF4444" />
+    <circle cx="32" cy="15" r="4.5" fill="#F59E0B" />
+    <circle cx="46" cy="15" r="4.5" fill="#10B981" />
+    <!-- URL Bar pill -->
+    <rect x="65" y="7" width="150" height="16" rx="8" fill="#1E293B" />
+    <text x="80" y="19" font-family="monospace" font-size="8.5" fill="#94A3B8">app.oryxenai.me</text>
+
+    <!-- Inside Browser: Live Portfolio Preview UI -->
+    <!-- Hero Banner Card with Mountain Graphic -->
+    <g transform="translate(15, 42)">
+      <rect width="200" height="85" rx="10" fill="#111827" stroke="#1F2937" stroke-width="1" />
+      <!-- Hero Headline Wireframe -->
+      <rect x="12" y="14" width="95" height="7" rx="3" fill="#FAF8F5" />
+      <rect x="12" y="26" width="60" height="4" rx="2" fill="#64748B" />
+      <rect x="12" y="42" width="38" height="12" rx="4" fill="#FF2E55" />
+      <!-- Scenic Mountain Silhouette on Hero Card -->
+      <path d="M120 70 L150 35 L175 60 L190 48 L200 70 Z" fill="#1E293B" />
+      <path d="M140 70 L165 45 L185 70 Z" fill="#334155" />
+    </g>
+
+    <!-- Portfolio 3-Column Work Cards -->
+    <g transform="translate(15, 140)">
+      <!-- Card 1 -->
+      <rect x="0" y="0" width="60" height="60" rx="8" fill="#111827" stroke="#1F2937" stroke-width="1" />
+      <rect x="6" y="6" width="48" height="28" rx="4" fill="#1E293B" />
+      <path d="M10 32 L22 18 L34 28 L42 22 L50 32 Z" fill="#3B82F6" opacity="0.6" />
+      <rect x="6" y="40" width="35" height="4" rx="2" fill="#FAF8F5" />
+      <rect x="6" y="48" width="44" height="3" rx="1.5" fill="#64748B" />
+
+      <!-- Card 2 -->
+      <rect x="70" y="0" width="60" height="60" rx="8" fill="#111827" stroke="#1F2937" stroke-width="1" />
+      <rect x="76" y="6" width="48" height="28" rx="4" fill="#1E293B" />
+      <polygon points="100,12 114,30 86,30" fill="#8B5CF6" opacity="0.7" />
+      <rect x="76" y="40" width="35" height="4" rx="2" fill="#FAF8F5" />
+      <rect x="76" y="48" width="44" height="3" rx="1.5" fill="#64748B" />
+
+      <!-- Card 3 -->
+      <rect x="140" y="0" width="60" height="60" rx="8" fill="#111827" stroke="#1F2937" stroke-width="1" />
+      <rect x="146" y="6" width="48" height="28" rx="4" fill="#1E293B" />
+      <circle cx="170" cy="20" r="10" fill="#00D2FF" opacity="0.7" />
+      <rect x="146" y="40" width="35" height="4" rx="2" fill="#FAF8F5" />
+      <rect x="146" y="48" width="44" height="3" rx="1.5" fill="#64748B" />
+    </g>
+
+    <!-- Bottom Status Bar -->
+    <g transform="translate(15, 215)">
+      <rect width="200" height="30" rx="8" fill="#06121E" stroke="#00D2FF" stroke-width="1" stroke-opacity="0.4" />
+      <circle cx="18" cy="15" r="4" fill="#10B981" />
+      <text x="30" y="19" font-family="monospace" font-size="9" fill="#38BDF8">LIVE PREVIEW READY</text>
+      <rect x="145" y="8" width="45" height="14" rx="4" fill="#00D2FF" />
+      <text x="153" y="18" font-family="sans-serif" font-weight="700" font-size="8" fill="#0B0F19">DEPLOY</text>
+    </g>
+  </g>
+</svg>

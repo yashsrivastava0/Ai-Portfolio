@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  
+  --color-paper: #faf7f3;
+  --color-paper-deep: #f4f0eb;
+  --color-ink: #111111;
+  --color-ink-soft: #252525;
+  --color-muted-main: #8e8b88;
+  --color-muted-light: #c9c5c1;
+  --color-dark-surface: #111111;
+  --color-dark-text: #f7f4f0;
+  --color-dark-muted: #6c6967;
+
+  --animate-float-slow: float-slow 10s ease-in-out infinite;
+  --animate-twinkle: twinkle-slow 4s ease-in-out infinite;
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(1.5deg); }
+  }
+  @keyframes twinkle-slow {
+    0%, 100% { opacity: 0.15; transform: scale(0.85); }
+    50% { opacity: 0.85; transform: scale(1.15); }
+  }
+}
+
+/* Custom CSS Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #faf7f3;
+}
+::-webkit-scrollbar-thumb {
+  background: #c9c5c1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8e8b88;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base styles override */
+body {
+  background-color: #faf7f3;
+  color: #111111;
+  font-feature-settings: "ss01" on, "cv01" on, "cv03" on;
+}
+
+/* Fine-grain noise procedural overlay */
+.noise-overlay {
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.045'/%3E%3C/svg%3E");
+}
+
+/* Entrance / Scroll reveal animation primitives */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(10px);
+  transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 900ms cubic-bezier(0.22, 1, 0.36, 1),
+              filter 900ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-init.revealed {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Reduced Motion Settings */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-init {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* Target element scroll-margin */
+[id] {
+  scroll-margin-top: 6rem;
+}
+
+/* Responsive clamp font-size for high-end editorial display title */
+.hero-title {
+  font-size: clamp(3rem, 11.5vw, 8.5rem);
+}
+
+.manifesto-word {
+  color: #c9c5c1;
+  will-change: transform, filter, opacity, color;
+}

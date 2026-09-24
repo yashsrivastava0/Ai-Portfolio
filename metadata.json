@@ -1,0 +1,6 @@
+{
+  "name": "Editorial Portfolio",
+  "description": "An elegant, high-end editorial portfolio for Yash Srivastava, an AI Engineer specializing in Agentic AI, orchestration, and AI backends, featuring smooth, motion-driven transitions and a refined aesthetic.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

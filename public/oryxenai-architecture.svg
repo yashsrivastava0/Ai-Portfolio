@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgArch" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0e17" />
+      <stop offset="100%" stop-color="#05060a" />
+    </linearGradient>
+    <linearGradient id="glowLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF2E55" />
+      <stop offset="50%" stop-color="#A855F7" />
+      <stop offset="100%" stop-color="#00D2FF" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="600" fill="url(#bgArch)" rx="16" />
+
+  <!-- Subtle Blueprint Grid -->
+  <g stroke="#1a2035" stroke-width="1" opacity="0.4">
+    <line x1="0" y1="100" x2="800" y2="100" />
+    <line x1="0" y1="200" x2="800" y2="200" />
+    <line x1="0" y1="300" x2="800" y2="300" />
+    <line x1="0" y1="400" x2="800" y2="400" />
+    <line x1="0" y1="500" x2="800" y2="500" />
+    <line x1="200" y1="0" x2="200" y2="600" />
+    <line x1="400" y1="0" x2="400" y2="600" />
+    <line x1="600" y1="0" x2="600" y2="600" />
+  </g>
+
+  <!-- Title -->
+  <text x="50" y="60" font-family="system-ui, sans-serif" font-weight="800" font-size="22" fill="#FAF8F5" letter-spacing="1">FIVE-STAGE MULTI-AGENT ORCHESTRATION</text>
+  <text x="50" y="85" font-family="system-ui, sans-serif" font-weight="500" font-size="13" fill="#94A3B8">Selective Handoffs • Context Compression • Durable PostgreSQL Workers</text>
+
+  <!-- Flow pipeline cards -->
+  <!-- Card 1: Discovery -->
+  <g transform="translate(50, 130)">
+    <rect width="200" height="90" rx="12" fill="#140810" stroke="#FF2E55" stroke-width="1.5" />
+    <text x="20" y="32" font-family="sans-serif" font-weight="700" font-size="14" fill="#FF8BA7">01 / DISCOVERY</text>
+    <text x="20" y="52" font-family="sans-serif" font-size="11" fill="#E2E8F0">Resume &amp; Project Ingestion</text>
+    <text x="20" y="70" font-family="monospace" font-size="10" fill="#94A3B8">Taxonomy Extraction</text>
+  </g>
+
+  <!-- Connector -->
+  <path d="M250 175 L290 175" stroke="#FF2E55" stroke-width="2" stroke-dasharray="4 4" />
+
+  <!-- Card 2: Content Architecture -->
+  <g transform="translate(290, 130)">
+    <rect width="220" height="90" rx="12" fill="#160820" stroke="#D926A9" stroke-width="1.5" />
+    <text x="20" y="32" font-family="sans-serif" font-weight="700" font-size="14" fill="#F472B6">02 / CONTENT ARCH</text>
+    <text x="20" y="52" font-family="sans-serif" font-size="11" fill="#E2E8F0">Fact Grounding &amp; Provenance</text>
+    <text x="20" y="70" font-family="monospace" font-size="10" fill="#94A3B8">Context Compression (-33%)</text>
+  </g>
+
+  <!-- Connector -->
+  <path d="M510 175 L550 175" stroke="#D926A9" stroke-width="2" stroke-dasharray="4 4" />
+
+  <!-- Card 3: Visual Direction -->
+  <g transform="translate(550, 130)">
+    <rect width="200" height="90" rx="12" fill="#100826" stroke="#8B5CF6" stroke-width="1.5" />
+    <text x="20" y="32" font-family="sans-serif" font-weight="700" font-size="14" fill="#C084FC">03 / VISUAL DIRECTION</text>
+    <text x="20" y="52" font-family="sans-serif" font-size="11" fill="#E2E8F0">Design System &amp; Palette</text>
+    <text x="20" y="70" font-family="monospace" font-size="10" fill="#94A3B8">Tailwind / Modernist Rules</text>
+  </g>
+
+  <!-- Down & Left Arrow from Stage 3 to Stage 4 -->
+  <path d="M650 220 L650 270 L400 270 L400 310" stroke="#8B5CF6" stroke-width="2" fill="none" />
+
+  <!-- Card 4: Generation Engine -->
+  <g transform="translate(200, 310)">
+    <rect width="220" height="95" rx="12" fill="#081028" stroke="#3B82F6" stroke-width="1.5" />
+    <text x="20" y="32" font-family="sans-serif" font-weight="700" font-size="14" fill="#93C5FD">04 / GENERATION ENGINE</text>
+    <text x="20" y="52" font-family="sans-serif" font-size="11" fill="#E2E8F0">Code Synthesis &amp; Components</text>
+    <text x="20" y="70" font-family="monospace" font-size="10" fill="#94A3B8">FastAPI &amp; Model Routing</text>
+  </g>
+
+  <!-- Connector -->
+  <path d="M420 357 L460 357" stroke="#38BDF8" stroke-width="2" stroke-dasharray="4 4" />
+
+  <!-- Card 5: Verification & Gate -->
+  <g transform="translate(460, 310)">
+    <rect width="290" height="95" rx="12" fill="#041a29" stroke="#00D2FF" stroke-width="1.5" />
+    <text x="20" y="32" font-family="sans-serif" font-weight="700" font-size="14" fill="#38BDF8">05 / VERIFICATION &amp; PREVIEW</text>
+    <text x="20" y="52" font-family="sans-serif" font-size="11" fill="#E2E8F0">Playwright Headless Browser Gate</text>
+    <text x="20" y="70" font-family="monospace" font-size="10" fill="#94A3B8">Live Deployment via Caddy &amp; Azure</text>
+  </g>
+
+  <!-- Durable Worker Banner Bottom -->
+  <g transform="translate(50, 460)">
+    <rect width="700" height="85" rx="12" fill="#0c101c" stroke="#1E293B" stroke-width="1.5" />
+    <text x="24" y="32" font-family="sans-serif" font-weight="700" font-size="13" fill="#FAF8F5">PRODUCTION EXECUTION INFRASTRUCTURE</text>
+    <text x="24" y="56" font-family="monospace" font-size="11" fill="#38BDF8">Durable PostgreSQL Workers • Checkpoint Recovery • Asynchronous Job Orchestration • Supabase JWT</text>
+    <line x1="24" y1="68" x2="676" y2="68" stroke="url(#glowLine)" stroke-width="2" />
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Rounded Background Card -->
+  <rect width="512" height="512" rx="112" fill="#0B0A09" />
+  
+  <!-- Outer Cyber-Antenna Loop -->
+  <path d="M256 120 V64" stroke="#33D1FF" stroke-width="24" stroke-linecap="round" />
+  <circle cx="256" cy="52" r="20" fill="#33D1FF" />
+  
+  <!-- Sleek Modernist Head Face Shield -->
+  <rect x="112" y="144" width="288" height="240" rx="64" fill="none" stroke="#FAF8F5" stroke-width="24" stroke-linejoin="round" />
+  
+  <!-- Cybernetic Eyes (Left: Warm Off-White, Right: Active Cyan) -->
+  <circle cx="200" cy="244" r="28" fill="#FAF8F5" />
+  <circle cx="312" cy="244" r="28" fill="#33D1FF" />
+  
+  <!-- Mini glowing highlight inside cyan eye -->
+  <circle cx="318" cy="238" r="10" fill="#0B0A09" />
+  
+  <!-- Humble Retro Smile -->
+  <path d="M216 312 H296" stroke="#FAF8F5" stroke-width="16" stroke-linecap="round" />
+</svg>
