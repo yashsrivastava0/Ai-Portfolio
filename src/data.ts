@@ -8,7 +8,7 @@ export const portfolioContent: PortfolioContent = {
   identity: {
     name: "Yash Srivastava",
     role: "AI ENGINEER",
-    professionalLabel: "Founding AI Engineer | Agentic AI",
+    professionalLabel: "AI Engineer | Agentic AI",
     since: "CREATING SINCE 2024",
     copyright: "2026",
     email: "yashxbbd@gmail.com",
@@ -22,9 +22,9 @@ export const portfolioContent: PortfolioContent = {
   },
   about: {
     greeting: "Hey!",
-    shortBio: "Founding AI Engineer focused on production Agentic AI and GenAI systems, building reliable multi-agent orchestration, context engineering, asynchronous execution runtimes, and cloud deployments.",
+    shortBio: "AI Engineer focused on production Agentic AI and GenAI systems, building reliable multi-agent orchestration, context engineering, asynchronous execution runtimes, and cloud deployments.",
     longBio: [
-      "I am a Founding AI Engineer with 1 year of experience building production Agentic AI and GenAI systems across multi-agent orchestration, context engineering, memory, RAG, tool-using agents, MCP, FastAPI/Python backends, asynchronous workers, PostgreSQL, Docker, and AWS.",
+      "I am an AI Engineer with 1 year of experience building production Agentic AI and GenAI systems across multi-agent orchestration, context engineering, memory, RAG, tool-using agents, MCP, FastAPI/Python backends, asynchronous workers, PostgreSQL, Docker, and AWS.",
       "I build reliable AI products end to end — from system architecture, context engineering, and model/tool integration to validation, observability, deployment, and production recovery — including customer-facing chatbots, voice agents, and multimodal workflows."
     ],
     cta: "Let's Connect",
@@ -226,13 +226,13 @@ export const portfolioContent: PortfolioContent = {
       role: "Founding AI Engineer",
       dates: "Oct 2025 – Present",
       location: "Hybrid",
+      summary: "Building a production AI-powered SDLC platform that turns a user's product idea into a deployable full-stack application through multi-agent workflows.",
       bullets: [
-        "Architected a production AI-powered SDLC platform connecting product requirements and technical design with agentic code generation, automated validation, sandboxed execution and deployment.",
-        "Built the multi-agent orchestration runtime for long-running workflows with dependency-aware DAG scheduling, parallel/sequential execution, asynchronous jobs, persistent state, human approval gates, bounded retries and partial-failure recovery.",
-        "Designed a relationship-aware context engineering layer that selects requirements, dependencies, prior decisions and generated artifacts for each model call; reduced downstream code-generation errors by 73% in internal benchmark testing versus the previous retrieval approach.",
-        "Built context-window and workflow-memory mechanisms using dynamic context assembly and priority-based compression, reducing representative prompt context from ~95K to ~63K tokens (~33%) while retaining critical auth, validation, permission and compliance constraints.",
-        "Defined MCP-compatible agent/tool contracts and production backend services with schema validation, scoped permissions, REST APIs, background workers, PostgreSQL workflow state, event streaming, artifact versioning and concurrency controls.",
-        "Engineered reliability with structured-output validation, quality gates, repeated-failure detection, execution feedback, provider fallback and isolated container testing; owned architecture-to-production delivery across AWS, Docker, AI/backend infrastructure and multimodal systems on a 6-person startup team."
+        "**Architected the core platform end to end**, taking applications from product requirements and technical design through AI-driven code generation, automated validation, sandboxed execution, and deployment as a single coordinated workflow.",
+        "**Built the multi-agent orchestration runtime** for long-running workflows, including dependency-graph scheduling, parallel and sequential execution, asynchronous jobs, persistent state, approval checkpoints, bounded retries, and recovery from partial failures; replacing the earlier linear execution model was estimated to reduce end-to-end workflow time by **30–40%**.",
+        "**Designed a relationship-aware context engineering layer** that assembles requirements, dependencies, prior decisions, and generated artifacts relevant to each model call rather than relying only on semantic retrieval, reducing downstream code-generation errors by **73% in production testing** versus the previous RAG-based approach.",
+        "**Built long-horizon context and workflow memory** using dynamic context assembly, priority-based compression, and cross-call continuity, reducing representative context from **~95K to ~63.4K tokens (~33%)** while preserving critical authentication, validation, permission, and compliance constraints; also designed schema-constrained tool and **MCP** interfaces for agent actions.",
+        "**Engineered the production backend and reliability layer** across REST APIs, PostgreSQL-backed workers, real-time event streaming, artifact versioning, structured-output validation, quality gates, model/provider fallback, and isolated container testing; owned architecture-to-production delivery on a **6-person startup team**, worked directly with founders on product and system-design decisions, and contributed to **engineering hiring through technical interviews and candidate evaluation**."
       ]
     },
     {

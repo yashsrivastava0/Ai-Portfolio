@@ -1,6 +1,24 @@
 import ScrollReveal from "./ScrollReveal";
 import { portfolioContent } from "../data";
 
+const renderFormattedText = (text: string) => {
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      const content = part.slice(2, -2);
+      return (
+        <strong
+          key={i}
+          className="font-semibold text-ink bg-ink/[0.04] px-1 py-0.5 rounded border border-ink/[0.08]"
+        >
+          {content}
+        </strong>
+      );
+    }
+    return part;
+  });
+};
+
 export default function ExperienceAndSkillsSection() {
   const { experience, skills, education } = portfolioContent;
 
@@ -50,12 +68,21 @@ export default function ExperienceAndSkillsSection() {
                     </div>
                   </div>
 
+                  {/* Summary Subtitle if present */}
+                  {exp.summary && (
+                    <div className="py-1">
+                      <p className="font-serif italic text-base md:text-lg text-ink/80 leading-relaxed border-l-2 border-ink/20 pl-4 py-0.5">
+                        {renderFormattedText(exp.summary)}
+                      </p>
+                    </div>
+                  )}
+
                   {/* Bullets */}
                   <ul className="space-y-3.5 text-base font-sans text-ink-soft tracking-tight leading-relaxed list-none pl-0">
                     {exp.bullets.map((bullet, bIdx) => (
                       <li key={bIdx} className="flex items-start">
                         <span className="text-ink/40 mr-3 select-none mt-2.5 shrink-0 block w-1.5 h-1.5 rounded-full bg-ink/40" />
-                        <span className="flex-1">{bullet}</span>
+                        <span className="flex-1">{renderFormattedText(bullet)}</span>
                       </li>
                     ))}
                   </ul>

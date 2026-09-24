@@ -33,14 +33,14 @@ function getGeminiClient() {
 // Portfolio context payload for Gemini (derived directly from src/data.ts)
 const portfolioContext = `
 Portfolio owner: Yash Srivastava
-Role: Founding AI Engineer | Agentic AI
+Role: AI Engineer | Agentic AI
 location: Lucknow, India
 availability: Remote
 email: yashxbbd@gmail.com
 links: LinkedIn (https://www.linkedin.com/in/yash-srivastava-bbd/), GitHub (https://github.com/yashsrivastava0), Twitter (https://x.com/YashDeveloper_)
 
 About:
-Yash Srivastava is a Founding AI Engineer with 1 year of experience building production Agentic AI and GenAI systems across multi-agent orchestration, context engineering, memory, RAG, tool-using agents, MCP, FastAPI/Python backends, asynchronous workers, PostgreSQL, Docker, and AWS.
+Yash Srivastava is an AI Engineer with 1 year of experience building production Agentic AI and GenAI systems across multi-agent orchestration, context engineering, memory, RAG, tool-using agents, MCP, FastAPI/Python backends, asynchronous workers, PostgreSQL, Docker, and AWS.
 
 Technical Skills:
 - Languages: Python, SQL, JavaScript, TypeScript
@@ -52,11 +52,12 @@ Technical Skills:
 
 Experience:
 1. Xpression Technologies (Oct 2025 - Present) | Founding AI Engineer | Hybrid
-   - Architected a production AI-powered SDLC platform connecting product requirements and technical design with agentic code generation, automated validation, sandboxed execution and deployment.
-   - Built multi-agent orchestration runtime with dependency-aware DAG scheduling, parallel/sequential execution, asynchronous jobs, persistent state, human approval gates, bounded retries and recovery.
-   - Designed relationship-aware context engineering layer; reduced downstream code-generation errors by 73%.
-   - Built context-window compression reducing prompt context from ~95K to ~63K tokens (~33%).
-   - Defined MCP-compatible agent/tool contracts and backend services.
+   - Summary: Building a production AI-powered SDLC platform that turns a user's product idea into a deployable full-stack application through multi-agent workflows.
+   - Architected the core platform end to end, taking applications from product requirements and technical design through AI-driven code generation, automated validation, sandboxed execution, and deployment as a single coordinated workflow.
+   - Built the multi-agent orchestration runtime for long-running workflows, including dependency-graph scheduling, parallel and sequential execution, asynchronous jobs, persistent state, approval checkpoints, bounded retries, and recovery from partial failures; replacing the earlier linear execution model was estimated to reduce end-to-end workflow time by 30–40%.
+   - Designed a relationship-aware context engineering layer that assembles requirements, dependencies, prior decisions, and generated artifacts relevant to each model call rather than relying only on semantic retrieval, reducing downstream code-generation errors by 73% in production testing versus the previous RAG-based approach.
+   - Built long-horizon context and workflow memory using dynamic context assembly, priority-based compression, and cross-call continuity, reducing representative context from ~95K to ~63.4K tokens (~33%) while preserving critical authentication, validation, permission, and compliance constraints; also designed schema-constrained tool and MCP interfaces for agent actions.
+   - Engineered the production backend and reliability layer across REST APIs, PostgreSQL-backed workers, real-time event streaming, artifact versioning, structured-output validation, quality gates, model/provider fallback, and isolated container testing; owned architecture-to-production delivery on a 6-person startup team, worked directly with founders on product and system-design decisions, and contributed to engineering hiring through technical interviews and candidate evaluation.
 2. JUTEQ Inc (Jul 2024 - Oct 2024) | AI Engineer | Remote
    - Built customer-service AI chatbot for AutoTrader Canada.
    - Developed VAPI voice agents for dealership appointment booking with Xtime/DealerFX and Playwright browser automation.

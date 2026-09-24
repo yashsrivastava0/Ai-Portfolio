@@ -72,6 +72,7 @@ export interface PortfolioContent {
     role: string;
     dates: string;
     location?: string;
+    summary?: string;
     bullets: string[];
   }[];
   skills: {

@@ -25,6 +25,8 @@ type SidekickState =
   | "cheeky"
   | "pointing"
   | "waving"
+  | "wave"
+  | "bored"
   | "excited"
   | "sleepy"
   | "reducedMotion";
@@ -163,6 +165,9 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
   const autoCommentCountRef = useRef<number>(0);
   const lastMouseMoveTime = useRef<number>(0);
   const shownIndicesRef = useRef<Record<string, number>>({});
+  const prevSectionRef = useRef<string>(activeSection);
+  const sectionGestureTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // 1. Accessibility: Detect OS reduced motion setting
   useEffect(() => {
@@ -224,7 +229,7 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < 160 && !isOpen) {
-          setSidekickState((prev) => (prev === "idle" || prev === "sleepy" ? "curious" : prev));
+          setSidekickState((prev) => (prev === "idle" || prev === "sleepy" || prev === "bored" ? "curious" : prev));
         } else if (distance >= 160 && !isOpen) {
           setSidekickState((prev) => (prev === "curious" ? "idle" : prev));
         }
@@ -297,7 +302,7 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
       let minDuration = 2500;
       let maxDuration = 5000;
 
-      if (sidekickState === "sleepy") {
+      if (sidekickState === "sleepy" || sidekickState === "bored") {
         maxRotate = 1.0;
         maxX = 0.2;
         maxY = 0.8;
@@ -437,6 +442,104 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
     };
   }, [currentPath]);
 
+  // 6b. Section switch detection: Trigger a 'wave' or 'pointing' animation gesture when character switches to a new section
+  useEffect(() => {
+    if (prevSectionRef.current === activeSection) return;
+    prevSectionRef.current = activeSection;
+
+    // Reset inactivity timer when user moves to a new section
+    resetInactivityTimer();
+
+    // Do not override if user is chatting in open modal or character is busy/dismissed/delayed
+    if (isOpen || isLoading || isDismissed || isDelayed) return;
+
+    // Determine appropriate gesture: 'wave' or 'pointing'
+    // Showcase sections (projects, skills, experience, education, manifesto, thoughts) invite 'pointing'
+    // Welcoming/conversational sections (hero, about, contact, testimonials) invite 'wave'
+    const pointingSections = ["projects", "skills", "experience", "education", "manifesto", "thoughts", "detail"];
+    let gesture: SidekickState;
+    if (pointingSections.includes(activeSection)) {
+      gesture = Math.random() > 0.2 ? "pointing" : "wave";
+    } else {
+      gesture = Math.random() > 0.2 ? "wave" : "pointing";
+    }
+
+    setSidekickState(gesture);
+
+    if (sectionGestureTimeoutRef.current) {
+      clearTimeout(sectionGestureTimeoutRef.current);
+    }
+
+    // Keep the gesture animation active for 2.4 seconds, then transition to idle smoothly
+    sectionGestureTimeoutRef.current = setTimeout(() => {
+      setSidekickState((curr) => {
+        if (curr === gesture || curr === "wave" || curr === "waving" || curr === "pointing") {
+          return "idle";
+        }
+        return curr;
+      });
+    }, 2400);
+
+    return () => {
+      if (sectionGestureTimeoutRef.current) {
+        clearTimeout(sectionGestureTimeoutRef.current);
+      }
+    };
+  }, [activeSection, isOpen, isLoading, isDismissed, isDelayed]);
+
+  // 6c. Secondary 'bored' animation state after 15 seconds of user inactivity
+  const resetInactivityTimer = () => {
+    // If character was currently bored, wake up back to idle
+    setSidekickState((prev) => (prev === "bored" ? "idle" : prev));
+
+    if (inactivityTimerRef.current) {
+      clearTimeout(inactivityTimerRef.current);
+    }
+
+    if (isDismissed || isOpen || !isTabVisible || isDelayed) return;
+
+    inactivityTimerRef.current = setTimeout(() => {
+      // Trigger bored state after 15 seconds of user inactivity
+      if (!isOpen && !isDismissed && !isLoading && isTabVisible) {
+        setSidekickState("bored");
+      }
+    }, 15000);
+  };
+
+  useEffect(() => {
+    if (!isTabVisible || isDismissed || isOpen) {
+      if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+      return;
+    }
+
+    let lastActivity = 0;
+    const onUserActivity = (e?: Event) => {
+      const now = Date.now();
+      // Throttle mousemove calls so we don't spam timer resets on high refresh displays
+      if (e?.type === "mousemove" && now - lastActivity < 250) {
+        return;
+      }
+      lastActivity = now;
+      resetInactivityTimer();
+    };
+
+    resetInactivityTimer();
+
+    const activityEvents = ["mousemove", "mousedown", "touchstart", "scroll", "keydown"];
+    activityEvents.forEach((ev) => {
+      window.addEventListener(ev, onUserActivity, { passive: true });
+    });
+
+    return () => {
+      if (inactivityTimerRef.current) {
+        clearTimeout(inactivityTimerRef.current);
+      }
+      activityEvents.forEach((ev) => {
+        window.removeEventListener(ev, onUserActivity);
+      });
+    };
+  }, [isTabVisible, isDismissed, isOpen, isLoading, isDelayed]);
+
   // 7. Context-Aware Organic Sarcastic Comment Engine (stationary delay, single-show, gesture synced)
   useEffect(() => {
     if (isDismissed || isMuted || isOpen || isLoading || isDelayed) {
@@ -444,9 +547,8 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
       return;
     }
 
-    // Immediately hide any active bubble and reset character when they start moving/scrolling to a new section
+    // Immediately hide any active bubble when moving/scrolling to a new section
     setAutomaticComment(null);
-    setSidekickState("idle");
 
     const getNextSarcasticComment = (sec: string): CommentConfig => {
       const list = sectionComments[sec] || sectionComments.hero;
@@ -855,6 +957,22 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
         ease: "easeInOut",
       },
     },
+    wave: {
+      y: [0, -3, 0],
+      transition: {
+        duration: 2.6,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
+    bored: {
+      y: [0, 1.8, -0.6, 1.8, 0],
+      transition: {
+        duration: 4.5,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
     listening: {
       y: [0, -2.5, 0],
       transition: {
@@ -906,6 +1024,7 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
         };
       case "hello":
       case "waving":
+      case "wave":
         // Head leans into the wave with warm tilt and overshoot
         return {
           rotate: [0, -2.5, 4.5, 2.5],
@@ -915,6 +1034,18 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
             duration: 0.6,
             times: [0, 0.2, 0.7, 1],
             ease: [0.34, 1.56, 0.64, 1] // upgraded ease-out overshoot
+          },
+        };
+      case "bored":
+        // Slumped, lazy tilt to the side
+        return {
+          rotate: [0, 7.5, 7.5, -3, 0],
+          x: [0, 1.2, 1.2, -0.5, 0],
+          y: [0, 1.5, 1.5, 0.6, 0],
+          transition: {
+            duration: 4.5,
+            repeat: Infinity,
+            ease: "easeInOut",
           },
         };
       case "listening":
@@ -982,6 +1113,7 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
         };
       case "hello":
       case "waving":
+      case "wave":
         return {
           rotate: [0, 3, -7, 4, -2, 0],
           transition: {
@@ -989,6 +1121,12 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
             times: [0, 0.15, 0.35, 0.55, 0.75, 1],
             ease: [0.34, 1.56, 0.64, 1] // upgraded ease-out overshoot
           },
+        };
+      case "bored":
+        // Antenna droops down limply
+        return {
+          rotate: [0, 14, 16, 10, 14],
+          transition: { duration: 4.5, repeat: Infinity, ease: "easeInOut" },
         };
       case "thinking":
         // High frequency micro jitter/thinking sparks
@@ -1050,6 +1188,7 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
         };
       case "hello":
       case "waving":
+      case "wave":
         // Anticipation (+12), shoot high (-112), high quality waving loop, settle back
         return {
           rotate: [0, 12, -112, -82, -108, -82, -108, -95],
@@ -1058,6 +1197,12 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
             times: [0, 0.12, 0.26, 0.42, 0.58, 0.74, 0.88, 1],
             ease: [0.34, 1.56, 0.64, 1] // upgraded ease-out overshoot
           },
+        };
+      case "bored":
+        // Left arm hangs down limp and relaxed
+        return {
+          rotate: [10, 15, 10],
+          transition: { duration: 4, repeat: Infinity, ease: "easeInOut" },
         };
       case "excited":
         // Continuous pumping action
@@ -1142,12 +1287,19 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
         };
       case "hello":
       case "waving":
+      case "wave":
         return {
           rotate: [0, -9, -3],
           transition: {
             duration: 0.75,
             ease: [0.34, 1.56, 0.64, 1] // upgraded ease-out overshoot
           },
+        };
+      case "bored":
+        // Slowly fidgeting/tapping on hip
+        return {
+          rotate: [-14, -6, -14],
+          transition: { duration: 2.2, repeat: Infinity, ease: "easeInOut" },
         };
       case "sleepy":
         return {
@@ -1204,10 +1356,19 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
         };
       case "hello":
       case "happy":
+      case "wave":
+      case "waving":
         return {
           scaleY: [1, 0.93, 1.03, 1],
           scaleX: [1, 1.03, 0.97, 1],
           transition: { duration: 2, repeat: Infinity, ease: "easeInOut" },
+        };
+      case "bored":
+        // Deep slow sigh breathing slump
+        return {
+          scaleY: [1, 0.94, 1.01, 0.95, 1],
+          scaleX: [1, 1.03, 0.98, 1.02, 1],
+          transition: { duration: 4.5, repeat: Infinity, ease: "easeInOut" },
         };
       case "speaking":
         return {
@@ -1510,7 +1671,7 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
                 <ellipse
                   cx="50"
                   cy="114"
-                  rx={reducedMotion ? "18" : sidekickState === "sleepy" ? "14" : "16"}
+                  rx={reducedMotion ? "18" : sidekickState === "sleepy" || sidekickState === "bored" ? "14" : "16"}
                   ry="3.5"
                   className="fill-ink opacity-[0.15] transition-all duration-300"
                   style={{
@@ -1619,6 +1780,8 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
                             ? "#FFAA33"
                             : sidekickState === "sleepy"
                             ? "#666666"
+                            : sidekickState === "bored"
+                            ? "#94A3B8"
                             : "#33D1FF"
                         }
                         animate={reducedMotion ? {} : { opacity: [1, 0.4, 1] }}
@@ -1644,7 +1807,7 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
                   <rect x="31" y="23" width="38" height="22" rx="6" fill="#1A2333" />
 
                   {/* Glowing Eyes */}
-                  {isBlinking && sidekickState !== "sleepy" ? (
+                  {isBlinking && sidekickState !== "sleepy" && sidekickState !== "bored" ? (
                     // Closed eyes during blinking (natural, irregular)
                     <>
                       <line x1="36" y1="31" x2="44" y2="31" stroke="#33D1FF" strokeWidth="3" strokeLinecap="round" className="drop-shadow-[0_0_3px_#33D1FF]" />
@@ -1656,7 +1819,18 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
                       <line x1="36" y1="31" x2="44" y2="31" stroke="#33D1FF" strokeWidth="3" strokeLinecap="round" />
                       <line x1="56" y1="31" x2="64" y2="31" stroke="#33D1FF" strokeWidth="3" strokeLinecap="round" />
                     </>
-                  ) : sidekickState === "happy" || sidekickState === "excited" || sidekickState === "hello" ? (
+                  ) : sidekickState === "bored" ? (
+                    // Half-lidded bored eyes with lazy gaze
+                    <>
+                      <rect x="35" y="27" width="10" height="8" rx="2" fill="#0E1624" />
+                      <circle cx="39" cy="32" r="2.5" fill="#33D1FF" className="drop-shadow-[0_0_2px_#33D1FF]" />
+                      <line x1="34" y1="28.5" x2="46" y2="28.5" stroke="#1A2333" strokeWidth="3" strokeLinecap="round" />
+
+                      <rect x="55" y="27" width="10" height="8" rx="2" fill="#0E1624" />
+                      <circle cx="59" cy="32" r="2.5" fill="#33D1FF" className="drop-shadow-[0_0_2px_#33D1FF]" />
+                      <line x1="54" y1="28.5" x2="66" y2="28.5" stroke="#1A2333" strokeWidth="3" strokeLinecap="round" />
+                    </>
+                  ) : sidekickState === "happy" || sidekickState === "excited" || sidekickState === "hello" || sidekickState === "waving" || sidekickState === "wave" ? (
                     // Happy inverted curve eyes (^^)
                     <>
                       <path
@@ -1726,6 +1900,9 @@ export default function PortfolioSidekick({ currentPath, onNavigate }: Portfolio
                       strokeLinecap="round"
                       className="animate-pulse drop-shadow-[0_0_3px_#33D1FF]"
                     />
+                  ) : sidekickState === "bored" ? (
+                    // Flat, bored unamused mouth line
+                    <line x1="45" y1="41" x2="55" y2="41" stroke="#33D1FF" strokeWidth="2" strokeLinecap="round" opacity="0.85" />
                   ) : (
                     // Flat, happy small smile line
                     <line x1="44" y1="41" x2="56" y2="41" stroke="#33D1FF" strokeWidth="2.5" strokeLinecap="round" />
